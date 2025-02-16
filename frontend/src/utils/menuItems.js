@@ -9,19 +9,19 @@ export const menuItems = [
         link:'/dashboard'
     },
     {
-        id: 1,
+        id: 2,
         title: 'View Transactions',
         icon: transactions,
         link:'/dashboard'
     },
     {
-        id: 1,
+        id: 3,
         title: 'Incomes',
         icon: trend,
         link:'/dashboard'
     },
     {
-        id: 1,
+        id: 4,
         title: 'Expenses',
         icon: expenses,
         link:'/dashboard'

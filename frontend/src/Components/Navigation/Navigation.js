@@ -4,7 +4,7 @@ import avatar from '../../img/avatar.jpg';
 import { menuItems } from "../../utils/menuItems";
 import { signout } from "../../utils/Icons";
 
-const Navigation = () => {
+const Navigation = ({ active, setActive }) => {
   return (
     <NavStyled>
       <div className="user-con">
@@ -17,7 +17,7 @@ const Navigation = () => {
 
       <ul className="menu-items">
         {menuItems.map((item) => (
-          <li key={item.id}>
+          <li key={item.id} onClick={() => setActive(item.id)} className={active === item.id ? 'active' : ''}>
             {item.icon}
             <span>{item.title}</span>
           </li>
@@ -26,9 +26,7 @@ const Navigation = () => {
 
       <div className="bottom-nav">
         <ul>
-          <li>
-            {signout} Sign Out
-          </li>
+          <li>{signout} Sign Out</li>
         </ul>
       </div>
     </NavStyled>
@@ -39,7 +37,7 @@ const NavStyled = styled.nav`
   padding: 2rem 1.5rem;
   width: 374px;
   height: 100%;
-  background: rgba(252, 246, 249, 0.78); /* Fixed typo */
+  background: rgba(252, 246, 249, 0.78);
   border: 3px solid #ffffff;
   backdrop-filter: blur(4.5px);
   border-radius: 32px;
@@ -53,7 +51,7 @@ const NavStyled = styled.nav`
     display: flex;
     align-items: center;
     gap: 1rem;
-    
+
     img {
       width: 80px;
       height: 80px;
@@ -64,17 +62,17 @@ const NavStyled = styled.nav`
       padding: 0.2rem;
       box-shadow: 0px 1px 17px rgba(0, 0, 0, 0.06);
     }
-    
+
     .text {
       display: flex;
       flex-direction: column;
-      
+
       span {
         font-size: 1.2rem;
         font-weight: bold;
         color: rgba(34, 34, 96, 1);
       }
-      
+
       p {
         color: rgba(34, 34, 96, 0.6);
       }
@@ -84,7 +82,7 @@ const NavStyled = styled.nav`
   .menu-items {
     list-style: none;
     padding: 0;
-    
+
     li {
       display: flex;
       align-items: center;
@@ -94,7 +92,8 @@ const NavStyled = styled.nav`
       cursor: pointer;
       color: rgba(34, 34, 96, 1);
       transition: all 0.3s ease-in-out;
-      
+      position: relative; /* Ensures the ::before pseudo-element works */
+
       &:hover {
         color: #ff647f;
       }
@@ -102,8 +101,8 @@ const NavStyled = styled.nav`
   }
 
   .bottom-nav {
-  margin-top:auto;
-  
+    margin-top: auto;
+
     ul {
       list-style: none;
       padding: 0;
@@ -117,10 +116,26 @@ const NavStyled = styled.nav`
       cursor: pointer;
       color: rgba(34, 34, 96, 1);
       transition: all 0.3s ease-in-out;
-      
+
       &:hover {
         color: #ff647f;
       }
+    }
+  }
+
+  .active {
+    color: rgba(34, 34, 96, 1);
+    font-weight: bold;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: #222260;
+      border-radius: 0 10px 10px 0;
     }
   }
 `;
